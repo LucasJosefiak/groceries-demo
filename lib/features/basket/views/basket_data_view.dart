@@ -55,6 +55,7 @@ class BasketDataView extends StatelessWidget {
           ),
           PrimaryButton(
             content: AppLocalizations.of(context)!.basketContinueToShipping,
+            fullWidth: true,
             onPressed: onContinueToShipping,
           ),
         ],

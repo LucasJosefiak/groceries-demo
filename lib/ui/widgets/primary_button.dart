@@ -16,12 +16,16 @@ class PrimaryButton extends StatefulWidget {
     required this.onPressed,
     this.enabled = true,
     this.leading,
+    this.width,
+    this.fullWidth = false,
   });
 
   final String content;
   final VoidCallback? onPressed;
   final bool enabled;
   final Widget? leading;
+  final double? width;
+  final bool fullWidth;
 
   @override
   State<PrimaryButton> createState() => _PrimaryButtonStateImpl();
@@ -82,13 +86,14 @@ class _PrimaryButtonStateImpl extends State<PrimaryButton> {
       _PrimaryButtonState.disabled => DesignSystemColor.grey.shade400,
     };
 
-    return GestureDetector(
+    Widget button = GestureDetector(
       onTap: _onTap,
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
       onTapCancel: _onTapCancel,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 100),
+        width: widget.fullWidth ? double.infinity : widget.width,
         padding: EdgeInsets.symmetric(
           horizontal: theme.spacing.l,
           vertical: theme.spacing.sm,
@@ -98,7 +103,9 @@ class _PrimaryButtonStateImpl extends State<PrimaryButton> {
           borderRadius: BorderRadius.circular(9999),
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
+          mainAxisSize: widget.fullWidth || widget.width != null 
+              ? MainAxisSize.max 
+              : MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (widget.leading != null) ...[
@@ -121,5 +128,7 @@ class _PrimaryButtonStateImpl extends State<PrimaryButton> {
         ),
       ),
     );
+
+    return button;
   }
 }

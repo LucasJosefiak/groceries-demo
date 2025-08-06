@@ -28,6 +28,7 @@ class BasketEmptyView extends StatelessWidget {
           ),
           PrimaryButton(
             content: AppLocalizations.of(context)!.startShopping,
+            fullWidth: true,
             onPressed: onStartShopping,
           ),
         ],

@@ -28,6 +28,7 @@ class AccountDataView extends StatelessWidget {
           if (!user.isVerified)
             PrimaryButton(
               content: 'Verify Email',
+              fullWidth: true,
               onPressed: onVerifyEmail,
               leading: Icon(
                 FontAwesomeIcons.circleExclamation,
