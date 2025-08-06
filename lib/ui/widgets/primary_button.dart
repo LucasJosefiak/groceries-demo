@@ -86,7 +86,7 @@ class _PrimaryButtonStateImpl extends State<PrimaryButton> {
       _PrimaryButtonState.disabled => DesignSystemColor.grey.shade400,
     };
 
-    Widget button = GestureDetector(
+    final button = GestureDetector(
       onTap: _onTap,
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
@@ -112,18 +112,24 @@ class _PrimaryButtonStateImpl extends State<PrimaryButton> {
               widget.leading!,
               SizedBox(width: theme.spacing.xs),
             ],
-            Text(
-              widget.content,
-              style: theme.typography.label.copyWith(
-                color: textColor,
+            Flexible(
+              child: Text(
+                widget.content,
+                style: theme.typography.label.copyWith(
+                  color: textColor,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
               ),
             ),
-            SizedBox(width: theme.spacing.xs),
-            FaIcon(
-              FontAwesomeIcons.arrowRight,
-              size: 20,
-              color: textColor,
-            ),
+            if (widget.width == null || widget.width! > 120) ...[
+              SizedBox(width: theme.spacing.xs),
+              FaIcon(
+                FontAwesomeIcons.arrowRight,
+                size: 20,
+                color: textColor,
+              ),
+            ],
           ],
         ),
       ),
